@@ -14,7 +14,7 @@ export class AuthService {
     }
     attemptAutoAuth() {
         if (localStorage.getItem('loginToken')) {
-            console.log('here');
+            console.log(localStorage.getItem('loginToken'));
         }
     }
     login(username: string, password: string): Observable<boolean> {
