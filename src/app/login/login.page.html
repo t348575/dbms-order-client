@@ -4,4 +4,32 @@
     </ion-toolbar>
 </ion-header>
 <ion-content>
+    <ion-grid class="full-height">
+        <ion-row class="full-height">
+            <ion-col size-sm="6" class="center-middle disappear-phone">
+                <ion-img src="./assets/logo.png" style="max-width: 625px; height: auto"></ion-img>
+            </ion-col>
+            <ion-col size="12" size-sm="6" class="center-middle">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col size-sm="5" size="12" offset="0" offset-sm="4">
+                            <form [formGroup]="form" (ngSubmit)="login()">
+                                <ion-item>
+                                    <ion-label position="floating">Email</ion-label>
+                                    <ion-input formControlName="username"></ion-input>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label position="floating">Password</ion-label>
+                                    <ion-input formArrayName="password"></ion-input>
+                                </ion-item>
+                                <br/>
+                                <ion-button color="primary" fill="outline" class="ion-float-end">Login</ion-button>
+                                <ion-button color="danger" fill="outline" class="ion-float-end">Sign Up</ion-button>
+                            </form>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>

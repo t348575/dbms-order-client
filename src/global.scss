@@ -24,3 +24,25 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.center-vertical {
+    display: flex;
+    align-items: center;
+}
+.center-vertical {
+    display: flex;
+    justify-content: center;
+}
+.center-middle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.full-height {
+    height: 100%;
+}
+@media screen and (max-width: 576px){
+    .disappear-phone {
+        display: none;
+    }
+}
