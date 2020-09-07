@@ -1,9 +1,66 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>register</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>Sign Up</ion-title>
+    </ion-toolbar>
 </ion-header>
-
 <ion-content>
-
+    <ion-grid class="full-height">
+        <form [formGroup]="form" (ngSubmit)="register()" autocomplete="on">
+            <ion-row>
+                <ion-col size-sm="4" size="12" offset-sm="2" offset="0">
+                    <ion-item>
+                        <ion-label position="floating">Email</ion-label>
+                        <ion-input type="email" formControlName="email"></ion-input>
+                    </ion-item>
+                    <ion-grid class="ion-no-padding">
+                        <ion-row>
+                            <ion-col size="3">
+                                <ion-item>
+                                    <ion-label position="floating">Code</ion-label>
+                                    <ion-select formControlName="code" [selectedText]="form.get('code').value.split(',')[0]">
+                                        <ion-select-option [value]="c.dial_code" *ngFor="let c of countries">{{c.name}}, {{c.dial_code}}</ion-select-option>
+                                    </ion-select>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="9">
+                                <ion-item>
+                                    <ion-label position="floating">Phone</ion-label>
+                                    <ion-input type="text" [brmasker]="{type: 'num', mask: '999-999-9999'}" formControlName="phone"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-col>
+                <ion-col size-sm="4" size="12">
+                    <ion-item>
+                        <ion-label position="floating">Name</ion-label>
+                        <ion-input type="text" formControlName="name"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="floating">Date of birth</ion-label>
+                        <ion-datetime display-format="DD-MM-YYYY" formControlName="dob" #datePicker></ion-datetime>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size-sm="4" size="12" offset-sm="4" offset="0">
+                    <ion-item>
+                        <ion-label position="floating">Password</ion-label>
+                        <ion-input type="password" formControlName="password"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="floating">Repeat password</ion-label>
+                        <ion-input type="password" formControlName="rePassword"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="floating">Address</ion-label>
+                        <ion-textarea type="text" formControlName="address"></ion-textarea>
+                    </ion-item>
+                    <br/>
+                    <ion-button color="danger" fill="outline" class="ion-float-end" type="submit">Sign Up</ion-button>
+                    <ion-button color="primary" fill="outline" class="ion-float-end" [routerLink]="['/login']">Login</ion-button>
+                </ion-col>
+            </ion-row>
+        </form>
+    </ion-grid>
 </ion-content>

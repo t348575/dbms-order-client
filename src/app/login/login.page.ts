@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../services/auth.service';
 import {Router} from '@angular/router';
+import {ToastService} from '../services/toast.service';
 
 @Component({
     selector: 'app-login',
@@ -21,10 +22,14 @@ export class LoginPage implements OnInit {
     login() {
         if (this.form.valid) {
             this.auth.login(this.form.get('username').value, this.form.get('password').value).subscribe((data: boolean) => {
-                this.router.navigate(['/home']).then().catch();
+                if (data) {
+                    this.router.navigate(['/home']).then().catch();
+                } else {
+                    ToastService.toast('Improper login or password', 3000, 'danger');
+                }
             });
         } else {
-
+            ToastService.toast('Fill in the details correctly!', 3000, 'danger');
         }
     }
 }
