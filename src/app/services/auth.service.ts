@@ -79,4 +79,7 @@ export class AuthService {
     isLoggedIn(): boolean {
         return this.loggedIn;
     }
+    getToken(): string {
+        return localStorage.getItem('apiToken');
+    }
 }
