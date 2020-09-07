@@ -1,6 +1,14 @@
-<ion-app>
+<ion-header>
     <ion-toolbar>
-        Menu bar
+        <ion-title>
+            Tool shed
+        </ion-title>
+        <ion-buttons slot="secondary">
+            <ion-searchbar></ion-searchbar>
+            <ion-button slot="primary">
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
     </ion-toolbar>
-    <ion-router-outlet></ion-router-outlet>
-</ion-app>
+</ion-header>
+<ion-router-outlet></ion-router-outlet>
