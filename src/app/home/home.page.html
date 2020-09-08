@@ -8,13 +8,15 @@
                 <h1>Browse latest products!</h1>
             </ion-col>
         </ion-row>
-        <ion-row>
-            <ion-list>
-                <ion-item *ngFor="let item of prod">
-                    {{item.prod_name}}
-                    <ion-img [src]="item.prod_img"></ion-img>
-                </ion-item>
-            </ion-list>
+        <ion-row *ngFor="let arr of prod">
+            <ion-card *ngFor="let ele of arr" class="browse-card">
+                <ion-img [src]="ele.prod_img" style="width: 80px;"></ion-img>
+                <ion-card-header>
+                    <ion-card-title>{{ele.prod_name}}</ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                </ion-card-content>
+            </ion-card>
         </ion-row>
     </ion-grid>
 </ion-content>
