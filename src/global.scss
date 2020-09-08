@@ -39,6 +39,10 @@
     justify-content: center;
 }
 .full-height {
+    height: 100%;
+}
+.full-width {
+    width: 100%;
 }
 @media screen and (max-width: 576px){
     .disappear-phone {
@@ -105,4 +109,14 @@
 }
 .login-popover .popover-content {
     width: 20%;
+}
+.title {
+    font-size: 1.5em;
+    font-weight: 500;
+    padding-right: 1em;
+    padding-left: 0.5em;
+    cursor: pointer;
+}
+.navbar-item {
+    cursor: pointer;
 }

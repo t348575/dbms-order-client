@@ -52,7 +52,6 @@ export class RegisterPage implements AfterViewInit {
         };
     }
     register() {
-        console.log(this.form.valid);
         if (this.form.valid) {
             const data = this.form.getRawValue();
             data.phone = data.code.replace('+', '') + data.phone.replace(/-/gi, '');

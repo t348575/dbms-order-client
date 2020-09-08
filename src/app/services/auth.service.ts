@@ -87,6 +87,8 @@ export class AuthService {
                 if (data.status) {
                     this.loggedIn = false;
                 }
+                localStorage.setItem('loginToken', '');
+                localStorage.setItem('apiToken', '');
             }, error => {
                 observer.next({status: false, message: error});
                 observer.complete();

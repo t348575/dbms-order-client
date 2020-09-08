@@ -1,17 +1,24 @@
-<ion-header>
-    <ion-toolbar>
-        <ion-title [routerLink]="['/home']" style="cursor: pointer;">
-            Tool shed
-        </ion-title>
-        <ion-buttons slot="secondary">
-            <ion-searchbar [debounce]="500"></ion-searchbar>
-            <ion-button>
-                <ion-icon slot="icon-only" name="cart-outline"></ion-icon>
-            </ion-button>
-            <ion-button slot="primary" (click)="presentPopover($event)">
-                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
-            </ion-button>
-        </ion-buttons>
-    </ion-toolbar>
-</ion-header>
-<ion-router-outlet></ion-router-outlet>
+<ion-app>
+    <ion-header>
+        <ion-toolbar>
+            <ion-label [routerLink]="['/home']" class="title" slot="start">
+                Tool shed
+            </ion-label>
+            <ion-label class="navbar-item" [routerLink]="['/home']">
+                Home
+            </ion-label>
+            <ion-buttons slot="primary">
+                <ion-searchbar [debounce]="500"></ion-searchbar>
+                <ion-button>
+                    <ion-icon slot="icon-only" name="cart-outline"></ion-icon>
+                </ion-button>
+                <ion-button slot="primary" (click)="presentPopover($event)">
+                    <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+                </ion-button>
+            </ion-buttons>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content>
+        <ion-router-outlet></ion-router-outlet>
+    </ion-content>
+</ion-app>
