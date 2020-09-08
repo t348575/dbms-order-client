@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Constants} from '../../constants';
-import {Observable} from 'rxjs';
+import {observable, Observable} from 'rxjs';
 import {Router} from '@angular/router';
 
 @Injectable({
@@ -72,6 +72,23 @@ export class AuthService {
                 }
             }, (err) => {
                 observer.next(false);
+                observer.complete();
+            });
+        });
+    }
+    logout(): Observable<{status: boolean, message: string}> {
+        return new Observable<{status: boolean, message: string}>(observer => {
+            this.http.post(`${Constants.server}/users/logout`, {
+                loginToken: localStorage.getItem('loginToken'),
+                apiToken: localStorage.getItem('apiToken')
+            }).subscribe((data: {status: boolean, message: string}) => {
+                observer.next(data);
+                observer.complete();
+                if (data.status) {
+                    this.loggedIn = false;
+                }
+            }, error => {
+                observer.next({status: false, message: error});
                 observer.complete();
             });
         });
