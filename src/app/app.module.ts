@@ -10,8 +10,9 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {TokenInterceptor} from './services/token.interceptor';
+import {UserIconComponent} from './shared/user-icon/user-icon.component';
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [AppComponent, UserIconComponent],
     entryComponents: [],
     imports: [
         BrowserModule,

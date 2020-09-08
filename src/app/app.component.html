@@ -5,7 +5,10 @@
         </ion-title>
         <ion-buttons slot="secondary">
             <ion-searchbar [debounce]="500"></ion-searchbar>
-            <ion-button slot="primary">
+            <ion-button>
+                <ion-icon slot="icon-only" name="cart-outline"></ion-icon>
+            </ion-button>
+            <ion-button slot="primary" (click)="presentPopover($event)">
                 <ion-icon slot="icon-only" name="person-circle"></ion-icon>
             </ion-button>
         </ion-buttons>

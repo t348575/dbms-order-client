@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import {Platform, PopoverController} from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import {AuthService} from './services/auth.service';
 import {ToastService} from './services/toast.service';
+import {UserIconComponent} from './shared/user-icon/user-icon.component';
 
 @Component({
     selector: 'app-root',
@@ -17,7 +18,8 @@ export class AppComponent {
         private splashScreen: SplashScreen,
         private statusBar: StatusBar,
         private auth: AuthService,
-        private toast: ToastService
+        private toast: ToastService,
+        private popover: PopoverController
     ) {
         this.auth.attemptAutoAuth();
         this.initializeApp();
@@ -28,5 +30,14 @@ export class AppComponent {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
         });
+    }
+    async presentPopover(ev: any) {
+        const popover = await this.popover.create({
+            component: UserIconComponent,
+            cssClass: 'login-popover',
+            event: ev,
+            translucent: true
+        });
+        return await popover.present();
     }
 }
