@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import {AuthService} from './services/auth.service';
 import {ToastService} from './services/toast.service';
 import {UserIconComponent} from './shared/user-icon/user-icon.component';
+import {CartComponent} from './shared/cart/cart.component';
 
 @Component({
     selector: 'app-root',
@@ -13,6 +14,7 @@ import {UserIconComponent} from './shared/user-icon/user-icon.component';
     styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+    public search;
     constructor(
         private platform: Platform,
         private splashScreen: SplashScreen,
@@ -31,13 +33,30 @@ export class AppComponent {
             this.splashScreen.hide();
         });
     }
-    async presentPopover(ev: any) {
+    async userIcon(ev: any) {
         const popover = await this.popover.create({
             component: UserIconComponent,
             cssClass: 'login-popover',
             event: ev,
-            translucent: true
+            translucent: true,
+            showBackdrop: false
         });
         return await popover.present();
+    }
+    async cart(ev: any) {
+        const popover = await this.popover.create({
+            component: CartComponent,
+            cssClass: 'cart-popover',
+            event: ev,
+            translucent: true,
+            showBackdrop: false
+        });
+        return await popover.present();
+    }
+    doSearch() {
+
+    }
+    predict(ev: any) {
+        console.log(ev.target.value);
     }
 }

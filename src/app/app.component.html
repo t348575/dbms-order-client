@@ -1,5 +1,5 @@
 <ion-app>
-    <ion-header>
+    <ion-header (keydown.enter)="doSearch()">
         <ion-toolbar>
             <ion-label [routerLink]="['/home']" class="title" slot="start">
                 Tool shed
@@ -8,11 +8,11 @@
                 Home
             </ion-label>
             <ion-buttons slot="primary">
-                <ion-searchbar [debounce]="500"></ion-searchbar>
-                <ion-button>
+                <ion-searchbar [debounce]="500" (ionChange)="predict($event)" [(ngModel)]="search"></ion-searchbar>
+                <ion-button (click)="cart($event)">
                     <ion-icon slot="icon-only" name="cart-outline"></ion-icon>
                 </ion-button>
-                <ion-button slot="primary" (click)="presentPopover($event)">
+                <ion-button slot="primary" (click)="userIcon($event)">
                     <ion-icon slot="icon-only" name="person-circle"></ion-icon>
                 </ion-button>
             </ion-buttons>

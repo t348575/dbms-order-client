@@ -11,14 +11,19 @@ import { AppRoutingModule } from './app-routing.module';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {TokenInterceptor} from './services/token.interceptor';
 import {UserIconComponent} from './shared/user-icon/user-icon.component';
+import {CartComponent} from './shared/cart/cart.component';
+import {FormsModule} from '@angular/forms';
+import {AutoCompleteModule} from 'ionic4-auto-complete';
 @NgModule({
-    declarations: [AppComponent, UserIconComponent],
+    declarations: [AppComponent, UserIconComponent, CartComponent],
     entryComponents: [],
     imports: [
         BrowserModule,
         IonicModule.forRoot(),
         AppRoutingModule,
-        HttpClientModule
+        HttpClientModule,
+        FormsModule,
+        AutoCompleteModule
     ],
     providers: [
         StatusBar,
