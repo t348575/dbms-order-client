@@ -10,7 +10,7 @@ import {ToastService} from '../../services/toast.service';
     styleUrls: ['./user-icon.component.scss'],
 })
 export class UserIconComponent implements OnInit {
-    private loggedIn = false;
+    public loggedIn = false;
     constructor(private router: Router, private popover: PopoverController, private auth: AuthService) {
         this.loggedIn = auth.isLoggedIn();
     }
