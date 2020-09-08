@@ -1,4 +1,10 @@
 .browse-card {
     width: calc(100vw / 6);
-    background-image: url('src/assets/alt-img.jpg');
+}
+.from-bottom {
+    display: flex;
+    flex-direction: column;
+}
+.grow-img {
+    flex-grow: 1;
 }
