@@ -13,17 +13,16 @@ import {TokenInterceptor} from './services/token.interceptor';
 import {UserIconComponent} from './shared/user-icon/user-icon.component';
 import {CartComponent} from './shared/cart/cart.component';
 import {FormsModule} from '@angular/forms';
-import {AutoCompleteModule} from 'ionic4-auto-complete';
+import {PredictComponent} from './shared/predict/predict.component';
 @NgModule({
-    declarations: [AppComponent, UserIconComponent, CartComponent],
+    declarations: [AppComponent, UserIconComponent, CartComponent, PredictComponent],
     entryComponents: [],
     imports: [
         BrowserModule,
         IonicModule.forRoot(),
         AppRoutingModule,
         HttpClientModule,
-        FormsModule,
-        AutoCompleteModule
+        FormsModule
     ],
     providers: [
         StatusBar,

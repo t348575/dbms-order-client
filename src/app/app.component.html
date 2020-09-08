@@ -1,22 +1,24 @@
 <ion-app>
     <ion-header (keydown.enter)="doSearch()">
-        <ion-toolbar>
-            <ion-label [routerLink]="['/home']" class="title" slot="start">
-                Tool shed
-            </ion-label>
-            <ion-label class="navbar-item" [routerLink]="['/home']">
-                Home
-            </ion-label>
-            <ion-buttons slot="primary">
-                <ion-searchbar [debounce]="500" (ionChange)="predict($event)" [(ngModel)]="search"></ion-searchbar>
-                <ion-button (click)="cart($event)">
-                    <ion-icon slot="icon-only" name="cart-outline"></ion-icon>
-                </ion-button>
-                <ion-button slot="primary" (click)="userIcon($event)">
-                    <ion-icon slot="icon-only" name="person-circle"></ion-icon>
-                </ion-button>
-            </ion-buttons>
-        </ion-toolbar>
+        <ion-title [routerLink]="['/home']" class="pointer">Tool Shed</ion-title>
+        <ion-label [routerLink]="['/home']" class="fill pointer">Home</ion-label>
+        <ion-searchbar [debounce]="500" (ionChange)="predict($event)" [(ngModel)]="search" class="searchbar"></ion-searchbar>
+        <ion-item *ngIf="searchResults.length > 0" class="search-products">
+            <ion-list style="width: 100%; max-height: 300px;">
+                <ion-item *ngFor="let result of searchResults" button>
+                    <ion-label>{{result.prod_name}}</ion-label>
+                    <img [src]="result.prod_img" height="50" onerror="this.src='assets/alt-img.jpg'"/>
+                </ion-item>
+            </ion-list>
+        </ion-item>
+        <ion-buttons>
+            <ion-button (click)="cart($event)">
+                <ion-icon slot="icon-only" name="cart-outline"></ion-icon>
+            </ion-button>
+            <ion-button slot="primary" (click)="userIcon($event)">
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
     </ion-header>
     <ion-content>
         <ion-router-outlet></ion-router-outlet>

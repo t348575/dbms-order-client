@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
-import {Platform, PopoverController} from '@ionic/angular';
+import {Platform, PopoverController, ViewDidEnter} from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import {AuthService} from './services/auth.service';
 import {ToastService} from './services/toast.service';
 import {UserIconComponent} from './shared/user-icon/user-icon.component';
 import {CartComponent} from './shared/cart/cart.component';
+import {ProductModel} from './models/product-model';
+import {ProductsService} from './services/products.service';
 
 @Component({
     selector: 'app-root',
@@ -14,23 +16,30 @@ import {CartComponent} from './shared/cart/cart.component';
     styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-    public search;
+    search;
+    searchResults: ProductModel[] = [];
     constructor(
         private platform: Platform,
         private splashScreen: SplashScreen,
         private statusBar: StatusBar,
         private auth: AuthService,
         private toast: ToastService,
-        private popover: PopoverController
+        private popover: PopoverController,
+        private product: ProductsService
     ) {
         this.auth.attemptAutoAuth();
         this.initializeApp();
     }
-
+    fixToolbar() {
+        /*setTimeout(() => {
+            document.querySelector('#toolbar').shadowRoot.querySelector('.toolbar-container').setAttribute('style', 'overflow: visible');
+        }, 1000);*/
+    }
     initializeApp() {
         this.platform.ready().then(() => {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
+            this.fixToolbar();
         });
     }
     async userIcon(ev: any) {
@@ -54,9 +63,14 @@ export class AppComponent {
         return await popover.present();
     }
     doSearch() {
-
     }
     predict(ev: any) {
-        console.log(ev.target.value);
+        if (this.search.length === 0) {
+            this.searchResults = [];
+        } else {
+            this.product.predict(this.search).subscribe(data => {
+                this.searchResults = data;
+            });
+        }
     }
 }
