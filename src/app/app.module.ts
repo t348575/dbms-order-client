@@ -11,14 +11,18 @@ import { AppRoutingModule } from './app-routing.module';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {TokenInterceptor} from './services/token.interceptor';
 import {UserIconComponent} from './shared/user-icon/user-icon.component';
+import {CartComponent} from './shared/cart/cart.component';
+import {FormsModule} from '@angular/forms';
+import {PredictComponent} from './shared/predict/predict.component';
 @NgModule({
-    declarations: [AppComponent, UserIconComponent],
+    declarations: [AppComponent, UserIconComponent, CartComponent, PredictComponent],
     entryComponents: [],
     imports: [
         BrowserModule,
         IonicModule.forRoot(),
         AppRoutingModule,
-        HttpClientModule
+        HttpClientModule,
+        FormsModule
     ],
     providers: [
         StatusBar,

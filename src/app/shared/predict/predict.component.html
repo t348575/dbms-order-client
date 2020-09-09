@@ -1,0 +1,21 @@
+<!--<div class="container">
+    <ion-item *ngIf="data.length > 0">
+        <ion-list style="width: 100%; max-height: 200px; overflow-y: scroll;">
+            <ion-item *ngFor="let result of data" button>
+                <ion-label>{{result.prod_name}}</ion-label>
+            </ion-item>
+        </ion-list>
+    </ion-item>
+</div>
+-->
+<section class="filter-wrapper">
+    <div class="keyword-wrapper">
+        <input type="text" id="keyword" placeholder="Search for artists..." autofocus autocomplete="off" (change)="predict($event)" [(ngModel)]="search"/>
+    </div>
+    <ul class="filter-select">
+        <li class="filter-select-list" *ngFor="let item of data">
+            <img [src]="item.prod_img" alt="" width="50" height="50">
+            <p class="artist-name">{{item.prod_name}}</p>
+            <span class="tags"></span>
+    </ul>
+</section>

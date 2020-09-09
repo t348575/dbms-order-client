@@ -24,7 +24,10 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
-
+@import "~ionic4-auto-complete/auto-complete";
+* {
+    box-sizing: border-box;
+}
 .center-vertical {
     display: flex;
     align-items: center;
@@ -39,6 +42,10 @@
     justify-content: center;
 }
 .full-height {
+    height: 100%;
+}
+.full-width {
+    width: 100%;
 }
 @media screen and (max-width: 576px){
     .disappear-phone {
@@ -104,5 +111,18 @@
     outline: 1px solid slategrey;
 }
 .login-popover .popover-content {
-    width: 20%;
+    width: 15%;
+}
+.cart-popover .popover-content {
+    width: 30%;
+}
+.title {
+    font-size: 1.5em;
+    font-weight: 500;
+    padding-right: 1em;
+    padding-left: 0.5em;
+    cursor: pointer;
+}
+.navbar-item {
+    cursor: pointer;
 }

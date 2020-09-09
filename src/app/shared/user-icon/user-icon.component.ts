@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {PopoverController} from '@ionic/angular';
 import {AuthService} from '../../services/auth.service';
+import {ToastService} from '../../services/toast.service';
 
 @Component({
     selector: 'app-user-icon',
@@ -9,7 +10,7 @@ import {AuthService} from '../../services/auth.service';
     styleUrls: ['./user-icon.component.scss'],
 })
 export class UserIconComponent implements OnInit {
-    private loggedIn = false;
+    public loggedIn = false;
     constructor(private router: Router, private popover: PopoverController, private auth: AuthService) {
         this.loggedIn = auth.isLoggedIn();
     }
@@ -19,6 +20,9 @@ export class UserIconComponent implements OnInit {
         this.router.navigate(location).then().catch();
     }
     logout() {
-        this.auth.logout();
+        this.auth.logout().subscribe(data => {
+            this.popover.dismiss();
+            ToastService.toast(data.message, 3000, data.status ? '' : 'danger');
+        });
     }
 }
