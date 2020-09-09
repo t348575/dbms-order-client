@@ -23,7 +23,7 @@ export class LoginPage implements OnInit {
         if (this.form.valid) {
             this.auth.login(this.form.get('username').value, this.form.get('password').value).subscribe((data: boolean) => {
                 if (data) {
-                    this.router.navigate(['/home']).then().catch();
+                    this.router.navigate(['/client/home']).then().catch();
                 } else {
                     ToastService.toast('Improper login or password', 3000, 'danger');
                 }
