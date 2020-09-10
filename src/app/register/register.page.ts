@@ -27,7 +27,7 @@ export class RegisterPage implements AfterViewInit {
         this.http.get('./assets/countries.json').subscribe((data: { name: string, dial_code: string, code: string }[]) => {
             this.countries = data;
             this.countries = this.countries.filter(a => a.dial_code !== null && a.dial_code.length < 5);
-            this.http.get('https://extreme-ip-lookup.com/json/').subscribe((data2: any) => {
+            this.http.get('http://ip-api.com/json/').subscribe((data2: any) => {
                 this.form.get('code').setValue(this.countries[this.countries.findIndex(a => a.code === data2.countryCode)].dial_code);
             });
         });
