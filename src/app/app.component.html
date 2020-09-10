@@ -1,8 +1,8 @@
 <ion-app>
     <ion-header (keydown.enter)="doSearch()">
-        <ion-title [routerLink]="['/client/home']" class="pointer">Tool Shed</ion-title>
-        <ion-label [routerLink]="['/client/home']" class="fill pointer">Home</ion-label>
-        <ion-searchbar [debounce]="500" (ionChange)="predict($event)" [(ngModel)]="search" class="searchbar" color="primary"></ion-searchbar>
+        <ion-title [routerLink]="['/home']" class="pointer">Tool Shed</ion-title>
+        <ion-label [routerLink]="['/home']" class="fill pointer">Home</ion-label>
+        <ion-searchbar [debounce]="500" (ionChange)="predict($event)" [(ngModel)]="search" class="searchbar"></ion-searchbar>
         <ion-item *ngIf="searchResults.length > 0" class="search-products">
             <ion-list style="width: 100%; max-height: 300px;">
                 <ion-item *ngFor="let result of searchResults" button>

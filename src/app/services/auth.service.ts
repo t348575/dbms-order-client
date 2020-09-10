@@ -53,7 +53,7 @@ export class AuthService {
                 observer.next(data);
                 observer.complete();
                 if (data.status) {
-                    setTimeout(() => this.router.navigate(['/client/login']).then().catch(), 3000);
+                    setTimeout(() => this.router.navigate(['/login']).then().catch(), 3000);
                 }
             }, error => {
                 observer.next({ message: 'http error', status: false });
