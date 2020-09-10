@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../services/auth.service';
 import {Router} from '@angular/router';
 import {ToastService} from '../services/toast.service';
+import {CartService} from '../services/cart.service';
 
 @Component({
     selector: 'app-login',
@@ -11,7 +12,7 @@ import {ToastService} from '../services/toast.service';
 })
 export class LoginPage implements OnInit {
     form: FormGroup;
-    constructor(private formBuilder: FormBuilder, private auth: AuthService, private router: Router) {
+    constructor(private formBuilder: FormBuilder, private auth: AuthService, private router: Router, private cart: CartService) {
         this.form = formBuilder.group({
             username: ['', [Validators.email, Validators.nullValidator, Validators.required]],
             password: ['', [Validators.nullValidator]]
@@ -24,6 +25,9 @@ export class LoginPage implements OnInit {
             this.auth.login(this.form.get('username').value, this.form.get('password').value).subscribe((data: boolean) => {
                 if (data) {
                     this.router.navigate(['/client/home']).then().catch();
+                    setTimeout(() => {
+                        this.cart.getCart();
+                    }, 1);
                 } else {
                     ToastService.toast('Improper login or password', 3000, 'danger');
                 }

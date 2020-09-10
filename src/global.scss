@@ -110,10 +110,13 @@
     outline: 1px solid slategrey;
 }
 .login-popover .popover-content {
-    width: 15%;
+    min-width: 15%;
+    max-width: 50%;
 }
 .cart-popover .popover-content {
-    width: 30%;
+    min-width: 30%;
+    max-width: 75%;
+    max-height: 100%;
 }
 .title {
     font-size: 1.5em;
@@ -124,4 +127,10 @@
 }
 .navbar-item {
     cursor: pointer;
+}
+.backdrop-no-scroll ion-content {
+    --overflow: hidden;
+}
+.backdrop-no-scroll ion-backdrop+* ion-content {
+    --overflow: visible;
 }
