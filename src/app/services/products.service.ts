@@ -21,6 +21,16 @@ export class ProductsService {
             const query = qs.stringify({search});
             this.http.get(`${Constants.server}/products/predictSearch?${query}`).subscribe((data: ProductModel[]) => {
                 observer.next(data);
+                observer.complete();
+            });
+        });
+    }
+    getProductsByID(ids: string[]): Observable<ProductModel[]> {
+        return new Observable<ProductModel[]>(observer => {
+            const query = qs.stringify({ids});
+            this.http.get(`${Constants.server}/products/byId?${query}`).subscribe((data: ProductModel[]) => {
+                observer.next(data);
+                observer.complete();
             });
         });
     }
