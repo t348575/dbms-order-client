@@ -1,3 +1,3 @@
 export class Constants {
-    static server = 'https://52ed27ac64f2.ngrok.io';
+    static server = 'http://2ae5a6b9740a.ngrok.io';
 }

@@ -6,7 +6,7 @@
             </ion-col>
         </ion-row>
         <ion-row *ngFor="let arr of prod" class="center-horizontal">
-            <ion-card *ngFor="let ele of arr" class="browse-card from-bottom">
+            <ion-card *ngFor="let ele of arr" class="browse-card from-bottom" [routerLink]="['/product-display',ele.prod_id]">
                 <ion-card-content class="center-horizontal grow-img">
                     <img [src]="ele.prod_img" style="width: 80px;" onerror="this.src='assets/alt-img.jpg'" />
                 </ion-card-content>

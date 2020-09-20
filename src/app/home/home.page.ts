@@ -20,4 +20,5 @@ export class HomePage {
     addToCart(product: ProductModel) {
         this.cart.addToCart(product);
     }
+
 }
