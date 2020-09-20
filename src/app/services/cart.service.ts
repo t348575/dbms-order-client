@@ -23,13 +23,15 @@ export class CartService {
         return this.cart;
     }
     getCart() {
-        this.http.get(`${Constants.server}/cart/getCart`).subscribe((data: CartModel[]) => {
-            if (data === null || data === undefined) {
-                this.cart = [];
-            } else {
-                this.cart = data;
-            }
-        });
+        if (this.auth.isLoggedIn()) {
+            this.http.get(`${Constants.server}/cart/getCart`).subscribe((data: CartModel[]) => {
+                if (data === null || data === undefined) {
+                    this.cart = [];
+                } else {
+                    this.cart = data;
+                }
+            });
+        }
     }
     addToCart(product: ProductModel) {
         const idx = this.cart.findIndex(a => a.product.prod_id === product.prod_id);

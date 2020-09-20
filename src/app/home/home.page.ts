@@ -10,8 +10,10 @@ import {CartService} from '../services/cart.service';
 })
 export class HomePage {
     prod: ProductModel[][] = [];
+    pageNum = 0;
     constructor(private products: ProductsService, private cart: CartService) {
-        this.products.browse(0, 25).subscribe((data: ProductModel[]) => {
+        this.products.browse(this.pageNum, 25).subscribe((data: ProductModel[]) => {
+            this.pageNum++;
             while (data.length > 0) {
                 this.prod.push(data.splice(0, 5));
             }
@@ -20,5 +22,15 @@ export class HomePage {
     addToCart(product: ProductModel) {
         this.cart.addToCart(product);
     }
-
+    loadData(event) {
+        this.products.browse(this.pageNum, 25).subscribe((data: ProductModel[]) => {
+            this.pageNum++;
+            while (data.length > 0) {
+                this.prod.push(data.splice(0, 5));
+            }
+            console.log(this.prod);
+            event.target.complete();
+            // event.target.disabled = true;
+        }, error => { console.log(error); });
+    }
 }

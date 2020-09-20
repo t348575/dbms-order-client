@@ -1,38 +1,44 @@
-
 <ion-content>
-
-    <ion-grid class="full-height full-width">
-      <ion-row>
-        <ion-col class="full-height full-width">
-           
-            <ion-row size-sm="2" class="center-middle disappear-phone">
-              <ion-img src="{{product['prod_img']}}" style="max-width: 200px;max-height: 200px; height: auto"></ion-img>
-            </ion-row>
-        </ion-col>
-        <ion-col>
-          <ion-row size-sm="2" class="center-middle disappear-phone">
-            <ion-text color="secondary">
-              <h1>{{product['prod_name']}}</h1>
-            </ion-text>
-          </ion-row>
-          <ion-row size-sm="2" class="center-middle disappear-phone">
-            <ion-text color="tertiary" aria-setsize="20">
-              <h1>{{product['prod_desc']}}</h1>
-            </ion-text>
-          </ion-row>
-          <ion-row size-sm="2" class="center-middle disappear-phone">
-            <ion-text color="tertiary">
-              <h1>Rs.{{product['prod_price']}}</h1>
-            </ion-text>
-          </ion-row>
-          <ion-row size-sm="2" class="center-middle disappear-phone">
-            <ion-text color="tertiary">
-              <h1>Rating:{{product['prod_rating']}}</h1>
-            </ion-text>
-          </ion-row>
-        
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-
+    <ion-card>
+        <ion-card-content>
+            <ion-grid class="full-height full-width">
+                <ion-row class="full-height full-width">
+                    <ion-col size="6" class="center-middle">
+                        <ion-img [src]="product.prod_img" style="max-width: 200px;max-height: 200px; height: auto"></ion-img>
+                    </ion-col>
+                    <ion-col size="6">
+                        <ion-grid>
+                            <ion-row class="center-middle">
+                                <ion-card-title style="font-size: 1.5em">
+                                    <h1>{{product.prod_name}}</h1>
+                                </ion-card-title>
+                            </ion-row>
+                            <br/>
+                            <ion-row class="center-middle">
+                                <ion-text>
+                                    <h1>{{product.prod_desc}}</h1>
+                                </ion-text>
+                            </ion-row>
+                            <ion-row class="center-middle">
+                                <ion-text>{{getDim()}}</ion-text>
+                            </ion-row>
+                            <ion-row class="center-middle">
+                                <ion-text>
+                                    <h1>₹{{product.prod_price}}</h1>
+                                </ion-text>
+                            </ion-row>
+                            <ion-row class="center-middle">
+                                <ion-text>
+                                    <h1>Rating: {{getRating(product.prod_rating)}}</h1>
+                                </ion-text>
+                                <ion-button fill="clear" (click)="addToCart(product)">
+                                    <ion-icon name="add-circle" slot="icon-only"></ion-icon>
+                                </ion-button>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card-content>
+    </ion-card>
 </ion-content>

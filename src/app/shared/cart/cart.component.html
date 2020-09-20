@@ -41,8 +41,15 @@
             </ion-grid>
         </ion-item>
     </ion-list>
-    <ion-footer class="center-middle footer">
-        <ion-button [disabled]="items.length === 0">Checkout</ion-button>
+    <ion-footer class="footer">
+        <ion-grid>
+            <ion-row class="center-middle">
+                Total: ₹{{total}}
+            </ion-row>
+            <ion-row class="center-middle">
+                <ion-button [disabled]="items.length === 0">Checkout</ion-button>
+            </ion-row>
+        </ion-grid>
     </ion-footer>
 </ion-content>
 
