@@ -13,9 +13,8 @@ import {TokenInterceptor} from './services/token.interceptor';
 import {UserIconComponent} from './shared/user-icon/user-icon.component';
 import {CartComponent} from './shared/cart/cart.component';
 import {FormsModule} from '@angular/forms';
-import {PredictComponent} from './shared/predict/predict.component';
 @NgModule({
-    declarations: [AppComponent, UserIconComponent, CartComponent, PredictComponent],
+    declarations: [AppComponent, UserIconComponent, CartComponent],
     entryComponents: [],
     imports: [
         BrowserModule,

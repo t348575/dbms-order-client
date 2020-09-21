@@ -42,6 +42,11 @@ export class CartService {
         }
         this.updateCart().subscribe(() => { this.getCart(); });
     }
+    deleteFromCart(product: ProductModel) {
+        const idx = this.cart.findIndex(a => a.product.prod_id === product.prod_id);
+        this.cart.splice(idx, 1);
+        this.updateCart().subscribe(() => { this.getCart(); });
+    }
     removeFromCart(product: ProductModel) {
         const idx = this.cart.findIndex(a => a.product.prod_id === product.prod_id);
         this.cart[idx].count--;

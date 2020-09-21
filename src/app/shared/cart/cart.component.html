@@ -46,7 +46,7 @@
             <ion-row class="center-middle">
                 Total: ₹{{total}}
             </ion-row>
-            <ion-row class="center-middle">
+            <ion-row class="center-middle" (click)="checkout()">
                 <ion-button [disabled]="items.length === 0">Checkout</ion-button>
             </ion-row>
         </ion-grid>

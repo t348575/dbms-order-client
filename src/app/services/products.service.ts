@@ -9,12 +9,27 @@ import {ProductModel} from '../models/product-model';
 })
 export class ProductsService {
     constructor(private http: HttpClient) { }
-    browse(page: number, numPerPage: number) {
+    browse(page: number, pageSize: number) {
         const query = qs.stringify({
-            pageSize: numPerPage,
+            pageSize,
             page
         });
         return this.http.get(`${Constants.server}/products/browse?${query}`);
+    }
+    search(
+        search: string,
+        page: number,
+        pageSize: number,
+        sortBy: 'prod_price' | 'prod_stock' | 'prod_rating',
+        dir: 'asc' | 'desc'
+    ): Observable<ProductModel[]> {
+        return new Observable<ProductModel[]>(observer => {
+            const query = qs.stringify({search, page, pageSize, sortBy, dir});
+            this.http.get(`${Constants.server}/products/search?${query}`).subscribe((data: ProductModel[]) => {
+                observer.next(data);
+                observer.complete();
+            });
+        });
     }
     predict(search: string): Observable<ProductModel[]> {
         return new Observable<ProductModel[]>(observer => {

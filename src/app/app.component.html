@@ -8,7 +8,7 @@
         <ion-searchbar [debounce]="500" (ionChange)="predict($event)" [(ngModel)]="search" class="searchbar"></ion-searchbar>
         <ion-item *ngIf="searchResults.length > 0" class="search-products">
             <ion-list style="width: 100%; max-height: 300px;">
-                <ion-item *ngFor="let result of searchResults" button>
+                <ion-item *ngFor="let result of searchResults" button (click)="goto(result.prod_id)">
                     <ion-label>{{result.prod_name}}</ion-label>
                     <img [src]="result.prod_img" height="50" onerror="this.src='assets/alt-img.jpg'"/>
                 </ion-item>

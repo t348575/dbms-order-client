@@ -8,7 +8,7 @@
         <ion-row *ngFor="let arr of prod" class="center-horizontal">
             <ion-card *ngFor="let ele of arr" class="browse-card from-bottom">
                 <ion-card-content class="center-horizontal grow-img" [routerLink]="['/product-display', ele.prod_id]">
-                    <img [src]="ele.prod_img" style="width: 80px;" onerror="this.src='assets/alt-img.jpg'" />
+                    <img [src]="ele.prod_img" style="max-width: 80px;" onerror="this.src='assets/alt-img.jpg'" />
                 </ion-card-content>
                 <ion-card-header>
                     <ion-card-title>

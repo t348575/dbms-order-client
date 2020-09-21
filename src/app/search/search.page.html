@@ -1,0 +1,23 @@
+<ion-content>
+    <ion-grid>
+        <ion-col size="2">
+
+        </ion-col>
+        <ion-col size="10">
+            <ion-list>
+                <ion-item *ngFor="let product of products">
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col size="2">
+                                <img [src]="product.prod_img" style="max-width: 200px; max-height: 200px;" onerror="this.src='assets/alt-img.jpg'" />
+                            </ion-col>
+                            <ion-col size="10">
+                                <ion-text>{{product.prod_name}}</ion-text>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-item>
+            </ion-list>
+        </ion-col>
+    </ion-grid>
+</ion-content>

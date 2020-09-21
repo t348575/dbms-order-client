@@ -10,6 +10,7 @@ import {ProductModel} from './models/product-model';
 import {ProductsService} from './services/products.service';
 import {CartModel} from './models/cart-model';
 import {CartService} from './services/cart.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-root',
@@ -27,7 +28,8 @@ export class AppComponent {
         private toast: ToastService,
         private popover: PopoverController,
         private product: ProductsService,
-        private cartService: CartService
+        private cartService: CartService,
+        private router: Router
     ) {
         this.initializeApp();
         this.auth.attemptAutoAuth().then((status: boolean) => {
@@ -36,16 +38,10 @@ export class AppComponent {
             }
         });
     }
-    fixToolbar() {
-        /*setTimeout(() => {
-            document.querySelector('#toolbar').shadowRoot.querySelector('.toolbar-container').setAttribute('style', 'overflow: visible');
-        }, 1000);*/
-    }
     initializeApp() {
         this.platform.ready().then(() => {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
-            this.fixToolbar();
         });
     }
     async userIcon(ev: any) {
@@ -69,6 +65,8 @@ export class AppComponent {
         return await popover.present();
     }
     doSearch() {
+        this.searchResults = [];
+        this.router.navigate(['/search', this.search]).then().catch();
     }
     predict(ev: any) {
         if (this.search.length === 0) {
@@ -78,5 +76,9 @@ export class AppComponent {
                 this.searchResults = data;
             });
         }
+    }
+    goto(id: string) {
+        this.searchResults = [];
+        this.router.navigate(['/product-display', id]).then().catch();
     }
 }
