@@ -24,7 +24,7 @@ export class RegisterPage implements AfterViewInit {
             address: ['', Validators.required],
             code: ['', Validators.required]
         }, { validator: this.ConfirmedValidator('password', 'rePassword') });
-        this.http.get('./assets/countries.json').subscribe((data: { name: string, dial_code: string, code: string }[]) => {
+        this.http.get('./assets/countries-phone.json').subscribe((data: { name: string, dial_code: string, code: string }[]) => {
             this.countries = data;
             this.countries = this.countries.filter(a => a.dial_code !== null && a.dial_code.length < 5);
             this.http.get('http://ip-api.com/json/').subscribe((data2: any) => {

@@ -19,6 +19,7 @@ export class CheckoutPage implements ViewWillEnter {
     countries: { name: string, dial_code: string, code: string }[] = [];
     addressForm: FormGroup;
     paymentForm: FormGroup;
+    cc: any;
     constructor(
         private auth: AuthService,
         private router: Router,
@@ -35,15 +36,24 @@ export class CheckoutPage implements ViewWillEnter {
         this.calcTotal();
         this.addressForm = this.formBuilder.group({
             country: ['', [Validators.required]],
-            phone: ['', [Validators.required, Validators.minLength(10)]],
+            phone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
             name: ['', Validators.required],
-            address: ['', Validators.required]
+            address: ['', Validators.required],
+            pinCode: ['', Validators.required]
         });
-        this.http.get('./assets/countries.json').subscribe((data: { name: string, dial_code: string, code: string }[]) => {
+        this.paymentForm = this.formBuilder.group({
+            number: ['', Validators.required],
+            name: ['', Validators.required],
+            expiry: ['', Validators.required],
+            cvc: ['', Validators.required]
+        });
+        this.http.get('./assets/countries-region.json').subscribe((data: { name: string, dial_code: string, code: string }[]) => {
             this.countries = data;
             this.countries = this.countries.filter(a => a.dial_code !== null && a.dial_code.length < 5);
             this.http.get('http://ip-api.com/json/').subscribe((data2: any) => {
-                // this.form.get('code').setValue(this.countries[this.countries.findIndex(a => a.code === data2.countryCode)].dial_code);
+                this.addressForm.get('country').setValue(
+                    this.countries[this.countries.findIndex(a => a.code === data2.countryCode)].name
+                );
             });
         });
     }
@@ -111,10 +121,31 @@ export class CheckoutPage implements ViewWillEnter {
         }
     }
     setSlide(slideNo: number) {
+        if (this.slides.indexOf(true) < slideNo) {
+            switch (this.slides.indexOf(true)) {
+                case 1: {
+                    if (!this.addressForm.valid) {
+                        ToastService.toast('Fill out the details correctly!', 3000, 'danger');
+                        return;
+                    }
+                    break;
+                }
+                case 2: {
+                    if (!this.paymentForm.valid) {
+                        ToastService.toast('Fill out the details correctly!', 3000, 'danger');
+                        return;
+                    }
+                    break;
+                }
+            }
+        }
         this.slides = this.slides.map(a => false);
         this.slides[slideNo] = true;
     }
     ionViewWillEnter() {
         this.slides = [true, false, false];
+    }
+    processPayment() {
+        console.log(this.cc);
     }
 }

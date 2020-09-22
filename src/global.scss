@@ -43,6 +43,10 @@
 .full-height {
     height: 100%;
 }
+.possible-full-height {
+    max-height: 100%;
+    overflow: visible;
+}
 .full-width {
     width: 100%;
 }
@@ -133,4 +137,7 @@
 }
 .backdrop-no-scroll ion-backdrop+* ion-content {
     --overflow: visible;
+}
+.uppercase {
+    text-transform: uppercase;
 }

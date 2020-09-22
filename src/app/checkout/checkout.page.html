@@ -1,6 +1,6 @@
 <ion-content>
-    <ion-grid class="full-height full-width" *ngIf="slides[0]">
-        <ion-row class="full-height">
+    <ion-grid *ngIf="slides[0]" class="full-height full-width">
+        <ion-row>
             <ion-col size="8">
                 <ion-list>
                     <ion-item *ngFor="let item of items">
@@ -68,22 +68,126 @@
                     </ion-card-content>
                     <h3 class="ion-float-end">Total: ₹{{total}}</h3>
                 </ion-card>
-                <ion-button class="ion-float-end" (click)="setSlide(1)">
+                <ion-button class="ion-float-end" (click)="setSlide(1)" style="margin-right: 0.6em">
                     Proceed with checkout
                     <ion-icon name="arrow-forward" slot="end"></ion-icon>
                 </ion-button>
             </ion-col>
         </ion-row>
     </ion-grid>
-    <ion-grid class="full-height full-width" *ngIf="slides[1]">
-        <ion-row>
-            <ion-col size="4" offset="2">
-                <ion-item>
-                    <ion-label position="floating">Address</ion-label>
-                    <ion-input></ion-input>
-                </ion-item>
+    <ion-grid *ngIf="slides[1]" class="full-height full-width">
+        <form [formGroup]="addressForm">
+            <ion-row>
+                <ion-col size="4" offset="2">
+                    <ion-item>
+                        <ion-label position="floating">Country</ion-label>
+                        <ion-select formControlName="country">
+                            <ion-select-option [value]="c.name" *ngFor="let c of countries">{{c.name}}</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="floating">Full name</ion-label>
+                        <ion-input type="text" formControlName="name"></ion-input>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label position="floating">PIN code</ion-label>
+                        <ion-input type="number" formControlName="pinCode"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="floating">Phone</ion-label>
+                        <ion-input type="number" formControlName="phone"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="6" offset="3">
+                    <ion-item>
+                        <ion-label position="floating">Address</ion-label>
+                        <ion-textarea type="text" formControlName="address" [rows]="5"></ion-textarea>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="1" offset="1">
+                    <ion-button (click)="setSlide(0)" class="ion-float-left">
+                        Cart
+                        <ion-icon name="arrow-back" slot="start"></ion-icon>
+                    </ion-button>
+                </ion-col>
+                <ion-col size="1" offset="8">
+                    <ion-button (click)="setSlide(2)" class="ion-float-right">
+                        Payment
+                        <ion-icon name="arrow-forward" slot="end"></ion-icon>
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </form>
+    </ion-grid>
+    <ion-grid *ngIf="slides[2]" class="full-height full-width">
+        <ion-row class="possible-full-height">
+            <ion-col size="8" offset="2">
+                <div class="card-container"></div>
             </ion-col>
-            <ion-col size="4">
+        </ion-row>
+        <ion-row>
+            <ion-col size="8" offset="2">
+                <form card container=".card-container"
+                      formatting="false"
+                      debug="true"
+                      [formGroup]="paymentForm">
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col size="6">
+                                <label class="pure-material-textfield-outlined">
+                                    <input placeholder=" " card-number formControlName="number">
+                                    <span>Card number</span>
+                                </label>
+                            </ion-col>
+                            <ion-col size="6">
+                                <label class="pure-material-textfield-outlined">
+                                    <input placeholder=" " card-name formControlName="name" class="uppercase">
+                                    <span>Card Holder's name</span>
+                                </label>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col size="6">
+                                <label class="pure-material-textfield-outlined">
+                                    <input placeholder=" " card-expiry formControlName="expiry">
+                                    <span>Expiry mm/yyyy</span>
+                                </label>
+                            </ion-col>
+                            <ion-col size="6">
+                                <label class="pure-material-textfield-outlined">
+                                    <input placeholder=" " card-cvc formControlName="cvc">
+                                    <span>CVC</span>
+                                </label>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </form>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="1" offset="1">
+                <ion-button (click)="setSlide(1)" class="ion-float-left">
+                    Address & Details
+                    <ion-icon name="arrow-back" slot="start"></ion-icon>
+                </ion-button>
+            </ion-col>
+            <ion-col size="1" offset="8">
+                <ion-button (click)="setSlide(3)" class="ion-float-right">
+                    Finalize
+                    <ion-icon name="arrow-forward" slot="end"></ion-icon>
+                </ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="slides[3]" class="full-height full-width">
+        <ion-row>
+            <ion-col size="8" offset="2">
 
             </ion-col>
         </ion-row>
