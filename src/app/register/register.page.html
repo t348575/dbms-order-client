@@ -13,7 +13,7 @@
                                 <ion-item>
                                     <ion-label position="floating">Code</ion-label>
                                     <ion-select formControlName="code" [selectedText]="form.get('code').value.split(',')[0]">
-                                        <ion-select-option [value]="c.dial_code" *ngFor="let c of countries">{{c.name}}, {{c.dial_code}}</ion-select-option>
+                                        <ion-select-option [value]="c.dial_code" *ngFor="let c of phoneCodes">{{c.name}}, {{c.dial_code}}</ion-select-option>
                                     </ion-select>
                                 </ion-item>
                             </ion-col>
@@ -38,7 +38,7 @@
                 </ion-col>
             </ion-row>
             <ion-row>
-                <ion-col size-sm="4" size="12" offset-sm="4" offset="0">
+                <ion-col size-sm="4" size="12" offset-sm="2" offset="0">
                     <ion-item>
                         <ion-label position="floating">Password</ion-label>
                         <ion-input type="password" formControlName="password"></ion-input>
@@ -49,12 +49,35 @@
                     </ion-item>
                     <ion-item>
                         <ion-label position="floating">Address</ion-label>
-                        <ion-textarea type="text" formControlName="address"></ion-textarea>
+                        <ion-textarea type="text" formControlName="address" rows="4"></ion-textarea>
                     </ion-item>
-                    <br/>
-                    <ion-button color="danger" fill="solid" class="ion-float-end" type="submit">Sign Up</ion-button>
-                    <ion-button color="primary" fill="solid" class="ion-float-end" [routerLink]="['/login']">Login</ion-button>
                 </ion-col>
+                <ion-col size-sm="4" size="12">
+                    <ion-item>
+                        <ion-label position="floating">Country</ion-label>
+                        <ion-select formControlName="country" (ionChange)="setRegions()">
+                            <ion-select-option *ngFor="let curr of countries">{{curr.countryName}}</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="floating">Region</ion-label>
+                        <ion-select formControlName="region">
+                            <ion-select-option *ngFor="let reg of regions">{{reg.name}}</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="floating">City</ion-label>
+                        <ion-input type="text" formControlName="city"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="floating">PIN code</ion-label>
+                        <ion-input type="number" max="9999999999" min="0" formControlName="pinCode"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row class="center-middle">
+                <ion-button color="primary" fill="solid" class="ion-float-end" [routerLink]="['/login']">Login</ion-button>
+                <ion-button color="danger" fill="solid" class="ion-float-end" type="submit">Sign Up</ion-button>
             </ion-row>
         </form>
     </ion-grid>

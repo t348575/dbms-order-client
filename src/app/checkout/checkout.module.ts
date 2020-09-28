@@ -8,6 +8,7 @@ import { CheckoutPageRoutingModule } from './checkout-routing.module';
 
 import { CheckoutPage } from './checkout.page';
 import {CardModule} from 'ngx-card';
+import {BrMaskerModule} from 'br-mask';
 @NgModule({
     imports: [
         CommonModule,
@@ -15,7 +16,8 @@ import {CardModule} from 'ngx-card';
         ReactiveFormsModule,
         IonicModule,
         CheckoutPageRoutingModule,
-        CardModule
+        CardModule,
+        BrMaskerModule
     ],
     declarations: [CheckoutPage]
 })

@@ -39,7 +39,11 @@ export class AuthService {
         name: string,
         dob: string,
         phone: string,
-        address: string
+        address: string,
+        country: string,
+        region: string,
+        city: string,
+        pinCode: string
     ): Observable<{ status: boolean, message: string }> {
         return new Observable<{status: boolean; message: string}>(observer => {
             this.http.post(`${Constants.server}/users/register`, {
@@ -48,7 +52,11 @@ export class AuthService {
                 name,
                 dob,
                 phone,
-                address
+                address,
+                country,
+                region,
+                city,
+                pinCode
             }).subscribe((data: {status: boolean; message: string}) => {
                 observer.next(data);
                 observer.complete();

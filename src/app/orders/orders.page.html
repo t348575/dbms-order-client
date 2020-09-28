@@ -1,0 +1,7 @@
+<ion-content>
+    <ion-list>
+        <ion-item *ngFor="let order of orders" [routerLink]="['/view-order', order.ord_id]">
+            Order with {{order.ord_prod.length}} items placed on {{toMysqlFormat(order.ord_date)}} Status: {{getStatus(order.state)}}
+        </ion-item>
+    </ion-list>
+</ion-content>

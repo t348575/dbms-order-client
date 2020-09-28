@@ -1,0 +1,49 @@
+<ion-content>
+    <ion-title class="some-title">Status: {{getStatus(order.state)}}</ion-title>
+    <ion-grid class="full-height full-width">
+        <ion-row>
+            <ion-col size="8">
+                <ion-list>
+                    <ion-item *ngFor="let item of items">
+                        <ion-grid>
+                            <ion-row>
+                                <ion-col size="2">
+                                    <img [src]="item.product.prod_img" style="width: 100px;" onerror="this.src='assets/alt-img.jpg'" />
+                                </ion-col>
+                                <ion-col size="7">
+                                    <ion-text>{{item.product.prod_name}}</ion-text>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-item>
+                </ion-list>
+            </ion-col>
+            <ion-col size="4">
+                <ion-card>
+                    <ion-card-header>
+                        <ion-card-title>
+                            Order summary
+                        </ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <ion-list>
+                            <ion-item *ngFor="let item of items">
+                                <ion-grid>
+                                    <ion-row>
+                                        <ion-col size="10">
+                                            {{item.product.prod_name}} - {{item.count}}
+                                        </ion-col>
+                                        <ion-col size="2">
+                                            ₹{{item.count * item.product.prod_price}}
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                            </ion-item>
+                        </ion-list>
+                    </ion-card-content>
+                    <h3 class="ion-float-end">Total: ₹{{order.ord_summ.total}}</h3>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

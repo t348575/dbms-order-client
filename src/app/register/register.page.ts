@@ -3,6 +3,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../services/auth.service';
 import {HttpClient} from '@angular/common/http';
 import {ToastService} from '../services/toast.service';
+import {UtilityService} from '../services/utility.service';
+import {CountryPhoneModel, CountryRegionModel, RegionModel} from '../models/country-model';
 
 @Component({
     selector: 'app-register',
@@ -12,8 +14,16 @@ import {ToastService} from '../services/toast.service';
 export class RegisterPage implements AfterViewInit {
     form: FormGroup;
     @ViewChild('datePicker') datePicker;
-    countries: { name: string, dial_code: string, code: string }[] = [];
-    constructor(private formBuilder: FormBuilder, private auth: AuthService, private http: HttpClient, private cdr: ChangeDetectorRef) {
+    phoneCodes: CountryPhoneModel[] = [];
+    countries: CountryRegionModel[] = [];
+    regions: RegionModel[] = [];
+    constructor(
+        private formBuilder: FormBuilder,
+        private auth: AuthService,
+        private http: HttpClient,
+        private cdr: ChangeDetectorRef,
+        private utilityService: UtilityService
+    ) {
         this.form = formBuilder.group({
             email: ['', [Validators.required, Validators.email]],
             name: ['', Validators.required],
@@ -21,16 +31,56 @@ export class RegisterPage implements AfterViewInit {
             phone: ['', Validators.required],
             password: ['', Validators.required],
             rePassword: ['', Validators.required],
+            country: ['', Validators.required],
+            city: ['', Validators.required],
+            region: ['', Validators.required],
+            pinCode: ['', Validators.required],
             address: ['', Validators.required],
             code: ['', Validators.required]
         }, { validator: this.ConfirmedValidator('password', 'rePassword') });
-        this.http.get('./assets/countries-phone.json').subscribe((data: { name: string, dial_code: string, code: string }[]) => {
+        this.utilityService.getCurrentCountryPhoneCode().subscribe(phoneCode => {
+            setTimeout(() => {
+                this.utilityService.getPhoneCodeList().subscribe(data => {
+                    this.phoneCodes = data;
+                    this.form.get('code').setValue(phoneCode);
+                });
+            }, 500);
+        });
+        this.utilityService.getCountryRegionList().subscribe(data => {
             this.countries = data;
-            this.countries = this.countries.filter(a => a.dial_code !== null && a.dial_code.length < 5);
-            this.http.get('http://ip-api.com/json/').subscribe((data2: any) => {
-                this.form.get('code').setValue(this.countries[this.countries.findIndex(a => a.code === data2.countryCode)].dial_code);
+            this.utilityService.getCurrentCountry().subscribe(curr => {
+                for (const v of this.countries) {
+                    if (v.countryShortCode === curr) {
+                        this.form.get('country').setValue(v.countryName);
+                        this.setRegions();
+                        setTimeout(() => {
+                            const currRegion = this.utilityService.getCurrentRegion();
+                            for (const k of v.regions) {
+                                if (k.name === currRegion) {
+                                    this.form.get('region').setValue(currRegion);
+                                    break;
+                                }
+                            }
+                        }, 500);
+                        if (this.utilityService.getCurrentCity().length > 0) {
+                            this.form.get('city').setValue(this.utilityService.getCurrentCity());
+                        }
+                        break;
+                    }
+                }
             });
         });
+    }
+    setRegions() {
+        const val = this.form.get('country').value;
+        if (val.length > 0) {
+            for (const v of this.countries) {
+                if (v.countryName === val) {
+                    this.regions = v.regions;
+                    break;
+                }
+            }
+        }
     }
     ngAfterViewInit() {
         const date = new Date(new Date().setFullYear(new Date().getFullYear() - 18));
@@ -57,7 +107,18 @@ export class RegisterPage implements AfterViewInit {
             data.phone = data.code.replace('+', '') + data.phone.replace(/-/gi, '');
             const date = new Date(data.dob);
             data.dob = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
-            this.auth.register(data.email, data.password, data.name, data.dob, data.phone, data.address).subscribe(res => {
+            this.auth.register(
+                data.email,
+                data.password,
+                data.name,
+                data.dob,
+                data.phone,
+                data.address,
+                data.country,
+                data.region,
+                data.city,
+                data.pinCode
+            ).subscribe(res => {
                 if (!res.status) {
                     ToastService.toast(res.message, 3000, 'danger');
                 } else {

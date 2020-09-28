@@ -33,6 +33,10 @@ export class CartService {
             });
         }
     }
+    emptyCart() {
+        this.cart = [];
+        this.updateCart().subscribe(() => { this.getCart(); });
+    }
     addToCart(product: ProductModel) {
         const idx = this.cart.findIndex(a => a.product.prod_id === product.prod_id);
         if (idx > -1) {
