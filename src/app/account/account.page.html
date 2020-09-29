@@ -1,3 +1,108 @@
 <ion-content>
-
+    <ion-grid class="full-height full-width">
+        <ion-row class="full-height full-width">
+            <ion-col size="9" *ngIf="useAddress">
+                <ion-card>
+                    <form [formGroup]="addressForm" (ngSubmit)="updateDetails()">
+                        <ion-row>
+                            <ion-col size="6">
+                                <ion-item>
+                                    <ion-label position="floating">Country</ion-label>
+                                    <ion-select formControlName="country" (ionChange)="setRegions()">
+                                        <ion-select-option *ngFor="let curr of countries">{{curr.countryName}}</ion-select-option>
+                                    </ion-select>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label position="floating">Region</ion-label>
+                                    <ion-select formControlName="region">
+                                        <ion-select-option *ngFor="let reg of regions">{{reg.name}}</ion-select-option>
+                                    </ion-select>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label position="floating">City</ion-label>
+                                    <ion-input type="text" formControlName="city"></ion-input>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label position="floating">PIN code</ion-label>
+                                    <ion-input type="number" max="9999999999" min="0" formControlName="pinCode"></ion-input>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label position="floating">Email</ion-label>
+                                    <ion-input type="email" formControlName="email"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="6">
+                                <ion-item>
+                                    <ion-label position="floating">Name</ion-label>
+                                    <ion-input type="text" formControlName="name"></ion-input>
+                                </ion-item>
+                                <ion-grid class="ion-no-padding">
+                                    <ion-row>
+                                        <ion-col size="3">
+                                            <ion-item>
+                                                <ion-label position="floating">Code</ion-label>
+                                                <ion-select formControlName="code" [selectedText]="addressForm.get('code').value.split(',')[0]">
+                                                    <ion-select-option [value]="c.dial_code" *ngFor="let c of phoneCodes">{{c.name}}, {{c.dial_code}}</ion-select-option>
+                                                </ion-select>
+                                            </ion-item>
+                                        </ion-col>
+                                        <ion-col size="9">
+                                            <ion-item>
+                                                <ion-label position="floating">Phone</ion-label>
+                                                <ion-input type="text" [brmasker]="{type: 'num', mask: '999-999-9999'}" formControlName="phone"></ion-input>
+                                            </ion-item>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                                <ion-item>
+                                    <ion-label position="floating">Address</ion-label>
+                                    <ion-textarea type="text" formControlName="address" [rows]="4"></ion-textarea>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label position="floating">Date of birth</ion-label>
+                                    <ion-datetime display-format="DD-MM-YYYY" formControlName="dob" #datePicker></ion-datetime>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                        <ion-button class="ion-float-right" type="submit">Update details</ion-button>
+                    </form>
+                </ion-card>
+            </ion-col>
+            <ion-col size="9" *ngIf="usePass">
+                <ion-card>
+                    <form [formGroup]="passForm" (ngSubmit)="updatePassword()">
+                        <ion-row>
+                            <ion-col size="6" offset="3">
+                                <ion-item>
+                                    <ion-label position="floating">Current password</ion-label>
+                                    <ion-input type="password" formControlName="oldPass"></ion-input>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label position="floating">New password</ion-label>
+                                    <ion-input type="password" formControlName="pass"></ion-input>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label position="floating">Retype new password</ion-label>
+                                    <ion-input type="password" formControlName="rePass"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                        <ion-button class="ion-float-right" type="submit">Change password</ion-button>
+                    </form>
+                </ion-card>
+            </ion-col>
+            <ion-col size="3">
+                <ion-card>
+                    <ion-list>
+                        <ion-item [color]="address" button (click)="goToAddress()">
+                            <ion-label>Address details</ion-label>
+                        </ion-item>
+                        <ion-item [color]="pass" button (click)="goToPassword()">
+                            <ion-label>Change password</ion-label>
+                        </ion-item>
+                    </ion-list>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>

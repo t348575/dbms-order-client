@@ -101,6 +101,7 @@ export class AuthService {
                 }
                 localStorage.setItem('loginToken', '');
                 localStorage.setItem('apiToken', '');
+                this.router.navigate(['']).then().catch();
             }, error => {
                 observer.next({status: false, message: error});
                 observer.complete();

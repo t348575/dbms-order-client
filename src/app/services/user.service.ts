@@ -18,4 +18,24 @@ export class UserService {
             });
         });
     }
+    updateDetails(details: { name: string, phone: string, email: string, dob: string, address: AddressModel }): Observable<boolean> {
+        return new Observable<boolean>(observer => {
+            this.http.post(`${Constants.server}/userData/updateBasic`, { details }).subscribe((data: {status: boolean}) => {
+                observer.next(data.status);
+                observer.complete();
+            });
+        });
+    }
+    updatePassword(oldPass: string, newPass: string): Observable<{ status: boolean, message: string }> {
+        return new Observable<{status: boolean; message: string}>(observer => {
+            this.http.post(`${Constants.server}/userData/changePass`,
+                {
+                    oldPass,
+                    newPass
+                }).subscribe((data: { status: boolean, message: string }) => {
+                observer.next(data);
+                observer.complete();
+            });
+        });
+    }
 }

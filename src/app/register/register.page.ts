@@ -84,7 +84,7 @@ export class RegisterPage implements AfterViewInit {
     }
     ngAfterViewInit() {
         const date = new Date(new Date().setFullYear(new Date().getFullYear() - 18));
-        this.datePicker.value = `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`;
+        this.datePicker.value = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
         this.cdr.detectChanges();
     }
     ConfirmedValidator(controlName: string, matchingControlName: string) {
@@ -106,7 +106,7 @@ export class RegisterPage implements AfterViewInit {
             const data = this.form.getRawValue();
             data.phone = data.code.replace('+', '') + data.phone.replace(/-/gi, '');
             const date = new Date(data.dob);
-            data.dob = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+            data.dob = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
             this.auth.register(
                 data.email,
                 data.password,
