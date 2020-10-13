@@ -29,9 +29,14 @@
                             </ion-row>
                             <ion-row class="center-middle">
                                 <ion-text>
+                                    <h1>Stock: {{getAvailable(product.prod_stock)}}</h1>
+                                </ion-text>
+                            </ion-row>
+                            <ion-row class="center-middle">
+                                <ion-text>
                                     <h1>Rating: {{getRating(product.prod_rating)}}</h1>
                                 </ion-text>
-                                <ion-button fill="clear" (click)="addToCart(product)">
+                                <ion-button fill="clear" (click)="addToCart(product)" [disabled]="product.prod_stock === 0">
                                     <ion-icon name="add-circle" slot="icon-only"></ion-icon>
                                 </ion-button>
                             </ion-row>

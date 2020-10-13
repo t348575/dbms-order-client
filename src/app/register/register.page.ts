@@ -25,7 +25,7 @@ export class RegisterPage implements AfterViewInit {
         private utilityService: UtilityService
     ) {
         this.form = formBuilder.group({
-            email: ['', [Validators.required, Validators.email]],
+            email: ['', [Validators.required]],
             name: ['', Validators.required],
             dob: ['', Validators.required],
             phone: ['', Validators.required],

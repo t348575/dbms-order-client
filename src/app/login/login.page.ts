@@ -14,7 +14,7 @@ export class LoginPage implements OnInit {
     form: FormGroup;
     constructor(private formBuilder: FormBuilder, private auth: AuthService, private router: Router, private cart: CartService) {
         this.form = formBuilder.group({
-            username: ['', [Validators.email, Validators.nullValidator, Validators.required]],
+            username: ['', [Validators.nullValidator, Validators.required]],
             password: ['', [Validators.nullValidator]]
         });
     }

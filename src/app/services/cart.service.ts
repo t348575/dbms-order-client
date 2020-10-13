@@ -5,6 +5,7 @@ import {Constants} from '../../constants';
 import {ProductModel} from '../models/product-model';
 import {AuthService} from './auth.service';
 import {Observable} from 'rxjs';
+import {ToastService} from './toast.service';
 
 @Injectable({
     providedIn: 'root'
@@ -40,6 +41,10 @@ export class CartService {
     addToCart(product: ProductModel) {
         const idx = this.cart.findIndex(a => a.product.prod_id === product.prod_id);
         if (idx > -1) {
+            if (this.cart[idx].count + 1 > product.prod_stock) {
+                ToastService.toast('Product stock low!', 3000, 'danger');
+                return;
+            }
             this.cart[idx].count++;
         } else {
             this.cart.push({ product, count: 1 });

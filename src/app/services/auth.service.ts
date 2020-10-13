@@ -10,7 +10,6 @@ import {Router} from '@angular/router';
 export class AuthService {
     private loggedIn = false;
     constructor(private http: HttpClient, private router: Router) {
-        this.attemptAutoAuth();
     }
     attemptAutoAuth() {
         return new Promise<boolean>(resolve => {

@@ -1,22 +1,36 @@
 <ion-content>
-    <ion-title class="some-title">Status: {{getStatus(order.state)}}</ion-title>
     <ion-grid class="full-height full-width">
         <ion-row>
             <ion-col size="8">
-                <ion-list>
-                    <ion-item *ngFor="let item of items">
-                        <ion-grid>
-                            <ion-row>
-                                <ion-col size="2">
-                                    <img [src]="item.product.prod_img" style="width: 100px;" onerror="this.src='assets/alt-img.jpg'" />
-                                </ion-col>
-                                <ion-col size="7">
-                                    <ion-text>{{item.product.prod_name}}</ion-text>
-                                </ion-col>
-                            </ion-row>
-                        </ion-grid>
-                    </ion-item>
-                </ion-list>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col size="10">
+                            <ion-title class="some-title">Status: {{getStatus(order.state)}}</ion-title>
+                            <ion-title class="some-small-title">Order placed on: {{toMysqlFormat(order.ord_date)}}</ion-title>
+                        </ion-col>
+                        <ion-col size="2">
+                            <ion-button class="ion-float-right shipping" [disabled]="order.state < 2" [routerLink]="['/shipping', order.ord_id]">Shipping status</ion-button>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col size="12">
+                            <ion-list>
+                                <ion-item *ngFor="let item of items">
+                                    <ion-grid>
+                                        <ion-row>
+                                            <ion-col size="2">
+                                                <img [src]="item.product.prod_img" style="width: 100px;" onerror="this.src='assets/alt-img.jpg'" />
+                                            </ion-col>
+                                            <ion-col size="7">
+                                                <ion-text>{{item.product.prod_name}}</ion-text>
+                                            </ion-col>
+                                        </ion-row>
+                                    </ion-grid>
+                                </ion-item>
+                            </ion-list>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
             </ion-col>
             <ion-col size="4">
                 <ion-card>

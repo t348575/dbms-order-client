@@ -47,7 +47,13 @@ const routes: Routes = [
         path: 'view-order/:id',
         canActivate: [AuthGuardService],
         loadChildren: () => import('./view-order/view-order.module').then( m => m.ViewOrderPageModule)
+    },
+    {
+        path: 'shipping/:id',
+        canActivate: [AuthGuardService],
+        loadChildren: () => import('./shipping/shipping.module').then( m => m.ShippingPageModule)
     }
+
 
 
 ];

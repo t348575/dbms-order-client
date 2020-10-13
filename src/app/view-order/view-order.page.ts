@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {OrderModel} from '../models/order-model';
 import {OrderService} from '../services/order.service';
 import {CartModel} from '../models/cart-model';
+import {toMysqlFormat} from '../../constants';
 
 @Component({
     selector: 'app-view-order',
@@ -64,6 +65,9 @@ export class ViewOrderPage implements OnInit {
                 this.items = data.slice(1);
             });
         });
+    }
+    toMysqlFormat(val) {
+        return toMysqlFormat(val);
     }
     ngOnInit() {
     }

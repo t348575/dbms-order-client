@@ -13,7 +13,7 @@
                 <ion-card-header>
                     <ion-card-title>
                         {{ele.prod_name}}
-                        <ion-button fill="clear" (click)="addToCart(ele)">
+                        <ion-button fill="clear" (click)="addToCart(ele)" [disabled]="ele.prod_stock === 0">
                             <ion-icon name="add-circle" slot="icon-only"></ion-icon>
                         </ion-button>
                     </ion-card-title>

@@ -38,7 +38,7 @@ export class AccountPage implements AfterViewInit {
             region: ['', Validators.required],
             pinCode: ['', Validators.required],
             code: ['', Validators.required],
-            email: ['', [Validators.required, Validators.email]],
+            email: ['', [Validators.required]],
             dob: ['', Validators.required]
         });
         this.passForm = this.formBuilder.group({

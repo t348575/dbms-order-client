@@ -60,7 +60,7 @@ export class CheckoutPage implements ViewWillEnter {
         this.paymentForm = this.formBuilder.group({
             number: ['', Validators.required],
             name: ['', Validators.required],
-            expiry: ['', Validators.required],
+            exp: ['', Validators.required],
             cvc: ['', Validators.required]
         });
         this.utilityService.getCurrentCountryPhoneCode().subscribe(phoneCode => {
@@ -278,7 +278,7 @@ export class CheckoutPage implements ViewWillEnter {
                 }
             };
             const payment = this.paymentForm.getRawValue();
-            payment.expiry = payment.expiry.slice(0, 2) + '/' + payment.expiry.slice(5);
+            payment.exp = payment.exp.slice(0, 2) + '/' + payment.exp.slice(5);
             payment.name = payment.name.toUpperCase();
             payment.card = payment.number.replace(/\s/g, '');
             delete payment.number;

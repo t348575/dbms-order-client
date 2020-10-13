@@ -5,7 +5,7 @@ import {ToastController} from '@ionic/angular';
     providedIn: 'root'
 })
 export class ToastService {
-    static toaster: ToastController
+    static toaster: ToastController;
     constructor(private toastController: ToastController) { ToastService.toaster = this.toastController; }
     static toast(message: string, duration = 3000, color = 'medium', position: 'top' | 'bottom' | 'middle' = 'top') {
         ToastService.toaster.create({

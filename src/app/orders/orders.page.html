@@ -1,4 +1,8 @@
 <ion-content>
+    <ion-item class="ion-float-right">
+        <ion-label>Only last 6 months</ion-label>
+        <ion-toggle (ionChange)="change()" [checked]="!oldOrders"></ion-toggle>
+    </ion-item>
     <ion-list>
         <ion-item *ngFor="let order of orders" [routerLink]="['/view-order', order.ord_id]">
             Order with {{order.ord_prod.length}} items placed on {{toMysqlFormat(order.ord_date)}} Status: {{getStatus(order.state)}}

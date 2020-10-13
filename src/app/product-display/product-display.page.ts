@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductModel } from '../models/product-model';
 import {ProductsService} from '../services/products.service';
 import {CartService} from '../services/cart.service';
+import {ToastService} from '../services/toast.service';
 
 @Component({
     selector: 'app-product-display',
@@ -37,6 +38,13 @@ export class ProductDisplayPage implements OnInit {
                 }
             });
         });
+    }
+    getAvailable(stock: number) {
+        if (stock > 0) {
+            return 'Available';
+        } else {
+            return 'Out of stock!';
+        }
     }
     getRating(rating: number): string | number {
         return rating < 0 ? 'N/A' : rating;

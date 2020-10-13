@@ -15,7 +15,7 @@ export class OrderService {
             name: string,
             cvc: number,
             card: string,
-            expiry: string
+            exp: string
         },
         details: {
             name: string,
@@ -35,5 +35,9 @@ export class OrderService {
     getOrder(id: string) {
         const query = qs.stringify({ id });
         return this.http.get(`${Constants.server}/order/getOrder?${query}`);
+    }
+    getShipmentStatus(ordId: string) {
+        const query = qs.stringify({ ordId });
+        return this.http.get(`${Constants.server}/order/getShipmentStatus?${query}`);
     }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {OrderService} from '../services/order.service';
 import {OrderModel} from '../models/order-model';
+import {toMysqlFormat} from '../../constants';
 
 @Component({
     selector: 'app-orders',
@@ -13,28 +14,19 @@ export class OrdersPage implements OnInit {
     constructor(private orderService: OrderService) {
         this.getOrders();
     }
+    toMysqlFormat(val) {
+        return toMysqlFormat(val);
+    }
     ngOnInit() {
     }
     getOrders() {
-        this.orderService.getOrders(this.oldOrders).subscribe((data: OrderModel[]) => {
+        this.orderService.getOrders(!this.oldOrders).subscribe((data: OrderModel[]) => {
             this.orders = data;
         });
     }
-    formatDate(date) {
-        let month = '' + (date.getMonth() + 1);
-        let day = '' + date.getDate();
-        const year = date.getFullYear();
-        if (month.length < 2) {
-            month = '0' + month;
-        }
-        if (day.length < 2) {
-            day = '0' + day;
-        }
-        return [year, month, day].join('-');
-    }
-    toMysqlFormat(date) {
-        date = new Date(date);
-        return this.formatDate(date) + ' ' + date.toTimeString().split(' ')[0];
+    change() {
+        this.oldOrders = !this.oldOrders;
+        this.getOrders();
     }
     getStatus(state: number) {
         switch (state) {

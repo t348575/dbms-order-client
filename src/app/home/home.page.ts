@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {ProductsService} from '../services/products.service';
 import {ProductModel} from '../models/product-model';
 import {CartService} from '../services/cart.service';
+import {ToastService} from '../services/toast.service';
 
 @Component({
     selector: 'app-home',
@@ -20,6 +21,15 @@ export class HomePage {
         }, error => { console.log(error); });
     }
     addToCart(product: ProductModel) {
+        for (const v of this.cart.getCartStatic()) {
+            if (v.product.prod_id === product.prod_id) {
+                if (v.count + 1 > product.prod_stock) {
+                    ToastService.toast('Product stock low!', 3000, 'danger');
+                    return;
+                }
+                break;
+            }
+        }
         this.cart.addToCart(product);
     }
     loadData(event) {

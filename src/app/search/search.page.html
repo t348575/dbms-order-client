@@ -7,7 +7,7 @@
             <ion-list>
                 <ion-item *ngFor="let product of products">
                     <ion-grid>
-                        <ion-row>
+                        <ion-row [routerLink]="['/product-display', product.prod_id]">
                             <ion-col size="2">
                                 <img [src]="product.prod_img" style="max-width: 200px; max-height: 200px;" onerror="this.src='assets/alt-img.jpg'" />
                             </ion-col>

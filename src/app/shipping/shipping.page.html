@@ -1,0 +1,8 @@
+<ion-content>
+    <ion-title class="margin">Estimated delivery on: {{toMysqlFormat(estDelivery)}}</ion-title>
+    <ion-list>
+        <ion-item *ngFor="let st of status" class="margin">
+            <ion-label>{{st.value}} at {{toMysqlFormat(st.time)}}</ion-label>
+        </ion-item>
+    </ion-list>
+</ion-content>

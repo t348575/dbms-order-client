@@ -94,10 +94,10 @@
             <ion-col size="3">
                 <ion-card>
                     <ion-list>
-                        <ion-item [color]="address" button (click)="goToAddress()">
+                        <ion-item [class.selected]="useAddress" lines="none" detail="false" (click)="goToAddress()" button>
                             <ion-label>Address details</ion-label>
                         </ion-item>
-                        <ion-item [color]="pass" button (click)="goToPassword()">
+                        <ion-item [class.selected]="usePass" lines="none" detail="false" (click)="goToPassword()" button>
                             <ion-label>Change password</ion-label>
                         </ion-item>
                     </ion-list>
